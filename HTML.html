@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking System Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Parking System Dashboard</h1>
+        <div class="info-container">
+            <div class="info" id="temperature">
+                <img src="temperature-icon.png" alt="Temperature Icon">
+                <p>Nhiệt độ: </p>
+            </div>
+            <div class="info" id="humidity">
+                <img src="humidity-icon.png" alt="Humidity Icon">
+                <p>Độ ẩm: </p>
+            </div>
+            <div class="info" id="parkingStatus1">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 1:</p>
+            </div>
+            <div class="info" id="parkingStatus2">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 2:</p>
+            </div>
+            <div class="info" id="parkingStatus3">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 3:</p>
+            </div>
+            <div class="info" id="parkingStatus4">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 4:</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,45 +1,56 @@
-// Thay đổi các giá trị dưới đây để phản ánh cấu hình của bạn
-const brokerAddress = "b1ee828a.us-east-1.emqx.cloud";
-const port = 8084;
-const clientId = "xuannhat";
-const username = "web";
-const password = "1111";
-const temperatureTopic = "NhietDo";
-const humidityTopic = "DoAm";
-//Kết nối với MQTT
-const client = mqtt.connect("wss://b1ee828a.us-east-1.emqx.cloud:8084/mqtt", {
-    clientId: clientId,
-    username: username,
-    password: password,
-});
+document.addEventListener("DOMContentLoaded", function () {
+    // Kết nối tới MQTT Broker
+    const client = new Paho.MQTT.Client('q75a76c2.emqx.cloud', 8083, 'WEB');
+    client.connect({
+        onSuccess: onConnect,
+        userName: "WEB",
+        password: "1111"})
+    // Đăng ký hàm xử lý khi kết nối thành công
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
 
-// Hàm được gọi khi kết nối thành công
-client.on("connect", function () {
-    console.log("Connected to MQTT broker");
+    function onConnect() {
+        console.log("Connected to MQTT Broker");
+        // Đăng ký để nhận thông tin từ các topic cần lắng nghe
+        client.subscribe("NhietDo");
+        client.subscribe("DoAm");
+        client.subscribe("Vitri/1");
+        client.subscribe("Vitri/2");
+        client.subscribe("Vitri/3");
+        client.subscribe("Vitri/4");
+    }
 
-    // Đăng ký theo dõi chủ đề nhiệt độ và độ ẩm
-    client.subscribe(temperatureTopic);
-    client.subscribe(humidityTopic);
-});
+    function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+            console.log("Connection lost: " + responseObject.errorMessage);
+        }
+    }
 
-// Hàm được gọi khi nhận được một thông điệp từ chủ đề
-client.on("message", function (topic, message) {
-    // Hiển thị nhiệt độ hoặc độ ẩm tùy thuộc vào chủ đề
-    if (topic === temperatureTopic) {
-        updateTemperature(message.toString());
-    } else if (topic === humidityTopic) {
-        updateHumidity(message.toString());
+    function onMessageArrived(message) {
+        // Xử lý dữ liệu nhận được từ MQTT
+        const topic = message.destinationName;
+        const payload = message.payloadString;
+
+        switch (topic) {
+            case "NhietDo":
+                document.getElementById("temperature").innerText = "Nhiệt độ: " + payload;
+                break;
+            case "DoAm":
+                document.getElementById("humidity").innerText = "Độ ẩm: " + payload;
+                break;
+            case "Vitri/1":
+                document.getElementById("parkingStatus1").innerText = "Vị trí  1: " + payload;
+                break;
+            case "Vitri/2":
+                document.getElementById("parkingStatus2").innerText = "Vị trí  2: " + payload;
+                break;
+            case "Vitri/3":
+                document.getElementById("parkingStatus3").innerText = "Vị trí  3: " + payload;
+                break;
+            case "Vitri/4":
+                document.getElementById("parkingStatus4").innerText = "Vị trí  4: " + payload;
+                break;
+            // Thêm xử lý cho các topic khác nếu cần
+        }
     }
 });
-
-// Hàm cập nhật giá trị nhiệt độ trên trang web
-function updateTemperature(value) {
-    const temperatureElement = document.getElementById("temperature");
-    temperatureElement.textContent = value + " °C";
-}
-
-// Hàm cập nhật giá trị độ ẩm trên trang web
-function updateHumidity(value) {
-    const humidityElement = document.getElementById("humidity");
-    humidityElement.textContent = value + "%";
-}
