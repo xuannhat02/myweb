@@ -1,6 +1,5 @@
 // Sử dụng thư viện mqtt.js
 //const mqtt = require('mqtt');
-
 document.addEventListener("DOMContentLoaded", function () {
     // Kết nối tới MQTT Broker qua WSS
     const client = mqtt.connect('ws://q75a76c2.emqx.cloud:8083/mqtt', {
