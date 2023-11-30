@@ -1,3 +1,5 @@
+/* Thêm đoạn mã sau vào phần CSS của bạn */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f0f0;
@@ -23,7 +25,6 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    justify-content: center;
     margin-top: 20px;
 }
 
@@ -57,4 +58,20 @@ p {
     .info-container {
         grid-template-columns: 1fr;
     }
+}
+
+/* Chỉnh sửa cho hàng đầu tiên */
+.first-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    align-items: center;
+}
+
+/* Chỉnh sửa cho hàng thứ hai */
+.second-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: space-around;
 }

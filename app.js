@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     client.connect({
         onSuccess: onConnect,
         userName: "WEB",
-        password: "1111"})
+        password: "1111"
+    });
+
     // Đăng ký hàm xử lý khi kết nối thành công
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
@@ -33,24 +35,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         switch (topic) {
             case "NhietDo":
-                document.getElementById("temperature").innerText = "Nhiệt độ: " + payload;
+                updateInfo("temperature", "Nhiệt độ: " + payload);
                 break;
             case "DoAm":
-                document.getElementById("humidity").innerText = "Độ ẩm: " + payload;
+                updateInfo("humidity", "Độ ẩm: " + payload);
                 break;
             case "Vitri/1":
-                document.getElementById("parkingStatus1").innerText = "Vị trí  1: " + payload;
+                updateInfo("parkingStatus1", "Vị trí 1: " + payload);
                 break;
             case "Vitri/2":
-                document.getElementById("parkingStatus2").innerText = "Vị trí  2: " + payload;
+                updateInfo("parkingStatus2", "Vị trí 2: " + payload);
                 break;
             case "Vitri/3":
-                document.getElementById("parkingStatus3").innerText = "Vị trí  3: " + payload;
+                updateInfo("parkingStatus3", "Vị trí 3: " + payload);
                 break;
             case "Vitri/4":
-                document.getElementById("parkingStatus4").innerText = "Vị trí  4: " + payload;
+                updateInfo("parkingStatus4", "Vị trí 4: " + payload);
                 break;
             // Thêm xử lý cho các topic khác nếu cần
+        }
+    }
+
+    function updateInfo(id, message) {
+        // Cập nhật nội dung của phần tử có id tương ứng
+        const element = document.getElementById(id);
+        if (element) {
+            // Giữ nguyên nội dung hiện tại và thêm tin nhắn MQTT vào cuối
+            element.innerHTML = element.innerHTML + "<br>" + message;
         }
     }
 });
