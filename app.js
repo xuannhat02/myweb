@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
     client.onMessageArrived = onMessageArrived;
 
     function onConnect() {
-        console.log("Connected to MQTT Broker");
-        // Đăng ký để nhận thông tin từ các topic cần lắng nghe
+        console.log("Đã kết nối tới MQTT Broker");
+        // Đăng ký để nhận thông tin từ các chủ đề cần lắng nghe
         client.subscribe("NhietDo");
         client.subscribe("DoAm");
         client.subscribe("Vitri/1");
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function onConnectionLost(responseObject) {
         if (responseObject.errorCode !== 0) {
-            console.log("Connection lost: " + responseObject.errorMessage);
+            console.log("Mất kết nối: " + responseObject.errorMessage);
         }
     }
 
@@ -35,33 +35,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
         switch (topic) {
             case "NhietDo":
-                updateInfo("temperature", "Nhiệt độ: " + payload);
+                appendText("temperature", "Nhiệt độ: " + payload);
                 break;
             case "DoAm":
-                updateInfo("humidity", "Độ ẩm: " + payload);
+                appendText("humidity", "Độ ẩm: " + payload);
                 break;
             case "Vitri/1":
-                updateInfo("parkingStatus1", "Vị trí 1: " + payload);
+                appendText("parkingStatus1", "Vị trí 1: " + payload);
                 break;
             case "Vitri/2":
-                updateInfo("parkingStatus2", "Vị trí 2: " + payload);
+                appendText("parkingStatus2", "Vị trí 2: " + payload);
                 break;
             case "Vitri/3":
-                updateInfo("parkingStatus3", "Vị trí 3: " + payload);
+                appendText("parkingStatus3", "Vị trí 3: " + payload);
                 break;
             case "Vitri/4":
-                updateInfo("parkingStatus4", "Vị trí 4: " + payload);
+                appendText("parkingStatus4", "Vị trí 4: " + payload);
                 break;
-            // Thêm xử lý cho các topic khác nếu cần
+            // Thêm xử lý cho các chủ đề khác nếu cần
         }
     }
 
-    function updateInfo(id, message) {
-        // Cập nhật nội dung của phần tử có id tương ứng
+    function appendText(id, newText) {
+        // Lấy tham chiếu đến phần tử có id tương ứng
         const element = document.getElementById(id);
+        
+        // Kiểm tra xem phần tử có tồn tại không
         if (element) {
-            // Giữ nguyên nội dung hiện tại và thêm tin nhắn MQTT vào cuối
-            element.innerHTML = element.innerHTML + "<br>" + message;
+            // Giữ nguyên phần đầu của HTML và chỉ cập nhật đoạn mới nhất
+            element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + newText;
         }
     }
+    
+    
 });
