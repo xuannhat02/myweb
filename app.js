@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Kết nối tới MQTT Broker
-    const client = new Paho.MQTT.Client('wss://q75a76c2.emqx.cloud', 8083, 'WEB');
+    const client = new Paho.MQTT.Client('q75a76c2.emqx.cloud', 8083, 'WEB');
     client.connect({
         onSuccess: onConnect,
         userName: "WEB",
