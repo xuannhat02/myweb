@@ -1,15 +1,17 @@
+// Sử dụng thư viện mqtt.js
+//const mqtt = require('mqtt');
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Kết nối tới MQTT Broker
-    const client = new Paho.MQTT.Client('q75a76c2.emqx.cloud', 8083, 'WEB');
-    client.connect({
-        onSuccess: onConnect,
-        userName: "WEB",
-        password: "1111"
+    // Kết nối tới MQTT Broker qua WSS
+    const client = mqtt.connect('ws://q75a76c2.emqx.cloud:8083/mqtt', {
+        clientId: 'WEB',
+        username: 'WEB',
+        password: '1111'
     });
 
     // Đăng ký hàm xử lý khi kết nối thành công
-    client.onConnectionLost = onConnectionLost;
-    client.onMessageArrived = onMessageArrived;
+    client.on('connect', onConnect);
+    client.on('message', onMessageArrived);
 
     function onConnect() {
         console.log("Đã kết nối tới MQTT Broker");
@@ -28,44 +30,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function onMessageArrived(message) {
+    function onMessageArrived(topic, message) {
         // Xử lý dữ liệu nhận được từ MQTT
-        const topic = message.destinationName;
-        const payload = message.payloadString;
+        const payload = message.toString();
 
         switch (topic) {
             case "NhietDo":
-                appendText("temperature", "Nhiệt độ: " + payload);
+                updateInfo("temperature", "Nhiệt độ: " + payload);
                 break;
             case "DoAm":
-                appendText("humidity", "Độ ẩm: " + payload);
+                updateInfo("humidity", "Độ ẩm: " + payload);
                 break;
             case "Vitri/1":
-                appendText("parkingStatus1", "Vị trí 1: " + payload);
+                updateInfo("parkingStatus1", "Vị trí 1: " + payload);
                 break;
             case "Vitri/2":
-                appendText("parkingStatus2", "Vị trí 2: " + payload);
+                updateInfo("parkingStatus2", "Vị trí 2: " + payload);
                 break;
             case "Vitri/3":
-                appendText("parkingStatus3", "Vị trí 3: " + payload);
+                updateInfo("parkingStatus3", "Vị trí 3: " + payload);
                 break;
             case "Vitri/4":
-                appendText("parkingStatus4", "Vị trí 4: " + payload);
+                updateInfo("parkingStatus4", "Vị trí 4: " + payload);
                 break;
             // Thêm xử lý cho các chủ đề khác nếu cần
         }
     }
 
-    function appendText(id, newText) {
-        // Lấy tham chiếu đến phần tử có id tương ứng
+    function updateInfo(id, message) {
         const element = document.getElementById(id);
-        
-        // Kiểm tra xem phần tử có tồn tại không
+
         if (element) {
             // Giữ nguyên phần đầu của HTML và chỉ cập nhật đoạn mới nhất
-            element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + newText;
+            element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + message;
         }
     }
-    
-    
 });
