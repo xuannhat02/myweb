@@ -1,12 +1,13 @@
 // Sử dụng thư viện mqtt.js
 //const mqtt = require('mqtt');
-document.addEventListener("DOMContentLoaded", function () {
-    // Kết nối tới MQTT Broker qua WSS
-    const client = mqtt.connect('ws://q75a76c2.emqx.cloud:8083/mqtt', {
-        clientId: 'WEB',
-        username: 'WEB',
-        password: '1111'
-    });
+const clientId = "WEB";
+const username = "web";
+const password = "1111";
+const client = mqtt.connect("wss://b1ee828a.us-east-1.emqx.cloud:8084/mqtt", {
+    clientId: clientId,
+    username: username,
+    password: password,
+});
 
     // Đăng ký hàm xử lý khi kết nối thành công
     client.on('connect', onConnect);
@@ -64,4 +65,4 @@ document.addEventListener("DOMContentLoaded", function () {
             element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + message;
         }
     }
-});
+;
