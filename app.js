@@ -3,7 +3,7 @@
 const clientId = "WEB";
 const username = "web";
 const password = "1111";
-const client = mqtt.connect("wss://b1ee828a.us-east-1.emqx.cloud:8084/mqtt", {
+const client = mqtt.connect("wss://o8f89733.us-east-1.emqx.cloud:8084/mqtt", {
     clientId: clientId,
     username: username,
     password: password,
@@ -22,6 +22,7 @@ const client = mqtt.connect("wss://b1ee828a.us-east-1.emqx.cloud:8084/mqtt", {
         client.subscribe("Vitri/2");
         client.subscribe("Vitri/3");
         client.subscribe("Vitri/4");
+        client.subscribe("KhiGas");
     }
 
     function onConnectionLost(responseObject) {
@@ -41,6 +42,9 @@ const client = mqtt.connect("wss://b1ee828a.us-east-1.emqx.cloud:8084/mqtt", {
             case "DoAm":
                 updateInfo("humidity", "Độ ẩm: " + payload);
                 break;
+            case "KhiGas":
+                updateInfo("KhiGas", "KhiGas: " + payload);
+                break
             case "Vitri/1":
                 updateInfo("parkingStatus1", "Vị trí 1: " + payload);
                 break;

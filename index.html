@@ -7,42 +7,51 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <!-- Phần header -->
+    <header class="header">
         <h1>Parking System Dashboard</h1>
+    </header>
+
+    <!-- Phần nội dung -->
+    <div class="container">
         <!-- Thêm "first-row" vào div chứa nhiệt độ và độ ẩm -->
-<div class="info-container first-row">
-    <div class="info" id="temperature">
-        <img src="temperature-icon.png" alt="Temperature Icon">
-        <p>Nhiệt độ: </p>
-    </div>
-    <div class="info" id="humidity">
-        <img src="humidity-icon.png" alt="Humidity Icon">
-        <p>Độ ẩm: </p>
-    </div>
-</div>
+        <div class="info-container first-row">
+            <div class="info" id="temperature">
+                <img src="temperature-icon.png" alt="Temperature Icon">
+                <p>Nhiệt độ: </p>
+            </div>
+            <div class="info" id="humidity">
+                <img src="humidity-icon.png" alt="Humidity Icon">
+                <p>Độ ẩm: </p>
+            </div>
+            <div class="info" id="KhiGas">
+                <img src="KhiGas-icon.png" alt="KhiGas Icon">
+                <p>Khí Gas: </p>
+            </div>
+        </div>
 
-<!-- Thêm "second-row" vào div chứa trạng thái của 4 vị trí -->
-<div class="info-container second-row">
-    <div class="info" id="parkingStatus1">
-        <img src="parking-icon.png" alt="Parking Icon">
-        <p>Vị trí 1:</p>
+        <!-- Thêm "second-row" vào div chứa trạng thái của 4 vị trí -->
+        <div class="info-container second-row">
+            <div class="info" id="parkingStatus1">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 1:</p>
+            </div>
+            <div class="info" id="parkingStatus2">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 2:</p>
+            </div>
+            <div class="info" id="parkingStatus3">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 3:</p>
+            </div>
+            <div class="info" id="parkingStatus4">
+                <img src="parking-icon.png" alt="Parking Icon">
+                <p>Vị trí 4:</p>
+            </div>
+        </div>
     </div>
-    <div class="info" id="parkingStatus2">
-        <img src="parking-icon.png" alt="Parking Icon">
-        <p>Vị trí 2:</p>
-    </div>
-    <div class="info" id="parkingStatus3">
-        <img src="parking-icon.png" alt="Parking Icon">
-        <p>Vị trí 3:</p>
-    </div>
-    <div class="info" id="parkingStatus4">
-        <img src="parking-icon.png" alt="Parking Icon">
-        <p>Vị trí 4:</p>
-    </div>
-</div>
-    </div>
-      <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

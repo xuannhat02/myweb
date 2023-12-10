@@ -1,10 +1,17 @@
-/* Thêm đoạn mã sau vào phần CSS của bạn */
-
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background: url('background-image.jpg') center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
+    color: white;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    background: url('cover-image.jpg') center center fixed; /* Thêm hình ảnh cho header nếu cần */
+    background-size: cover;
 }
 
 .container {
@@ -15,12 +22,26 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
-}
-
-h1 {
     color: #333;
 }
 
+/* Các phần CSS khác giữ nguyên */
+
+h1 {
+    color: #fff; /* Màu chữ trắng để nổi bật trên nền đen */
+}
+
+.info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.3s;
+    color: #0b0b0b; /* Màu chữ trắng để nổi bật trên nền đen */
+}
+
+/* Các phần info-container và các info vẫn giữ nguyên */
 .info-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -29,7 +50,7 @@ h1 {
 }
 
 .info {
-    background-color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -66,8 +87,9 @@ p {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
     align-items: center;
+    position: relative; /* Thêm dòng này để sử dụng z-index */
+    z-index: 1; /* Sử dụng z-index để đảm bảo phần này nổi lên trên dải bìa */
 }
-
 /* Chỉnh sửa cho hàng thứ hai */
 .second-row {
     display: grid;
