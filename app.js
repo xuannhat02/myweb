@@ -1,7 +1,7 @@
 // Sử dụng thư viện mqtt.js
 //const mqtt = require('mqtt');
 const clientId = "WEB";
-const username = "web";
+const username = "WEB";
 const password = "1111";
 const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
     clientId: clientId,

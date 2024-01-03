@@ -1,10 +1,10 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: url('background-image.jpg') center center fixed;
+    background: url('background.jpg') center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
-    color: white;
+    color: rgb(151, 240, 137);
 }
 
 .header {
@@ -17,7 +17,7 @@ body {
 .container {
     max-width: 800px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color: #f4fbef;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
