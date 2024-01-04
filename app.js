@@ -32,35 +32,36 @@ const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
     }
 
 let payload;
-    function onMessageArrived(topic, message) {
-        // Xử lý dữ liệu nhận được từ MQTT
-        const payload = message.toString();
 
-        switch (topic) {
-            case "NhietDo":
-                updateInfo("temperature", "Nhiệt độ: " + payload);
-                break;
-            case "DoAm":
-                updateInfo("humidity", "Độ ẩm: " + payload);
-                break;
-            case "KhiGas":
-                updateInfo("KhiGas", "KhiGas: " + payload);
-                break
-            case "Vitri/1":
-                updateInfo("parkingStatus1", "Vị trí 1: " + payload);
-                break;
-            case "Vitri/2":
-                updateInfo("parkingStatus2", "Vị trí 2: " + payload);
-                break;
-            case "Vitri/3":
-                updateInfo("parkingStatus3", "Vị trí 3: " + payload);
-                break;
-            case "Vitri/4":
-                updateInfo("parkingStatus4", "Vị trí 4: " + payload);
-                break;
-            // Thêm xử lý cho các chủ đề khác nếu cần
-        }
+function onMessageArrived(topic, message) {
+    // Xử lý dữ liệu nhận được từ MQTT
+    payload = message.toString();
+
+    switch (topic) {
+        case "NhietDo":
+            updateInfo("temperature", "Nhiệt độ: " + payload);
+            break;
+        case "DoAm":
+            updateInfo("humidity", "Độ ẩm: " + payload);
+            break;
+        case "KhiGas":
+            updateInfo("KhiGas", "KhiGas: " + payload);
+            break;
+        case "Vitri/1":
+            updateInfo("parkingStatus1", "Vị trí 1: " + payload);
+            break;
+        case "Vitri/2":
+            updateInfo("parkingStatus2", "Vị trí 2: " + payload);
+            break;
+        case "Vitri/3":
+            updateInfo("parkingStatus3", "Vị trí 3: " + payload);
+            break;
+        case "Vitri/4":
+            updateInfo("parkingStatus4", "Vị trí 4: " + payload);
+            break;
+        // Thêm xử lý cho các chủ đề khác nếu cần
     }
+}
 
 function updateInfo(id, message) {
     const element = document.getElementById(id);
