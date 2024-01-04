@@ -31,6 +31,7 @@ const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
         }
     }
 
+let payload;
     function onMessageArrived(topic, message) {
         // Xử lý dữ liệu nhận được từ MQTT
         const payload = message.toString();
@@ -61,12 +62,21 @@ const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
         }
     }
 
-    function updateInfo(id, message) {
-        const element = document.getElementById(id);
+function updateInfo(id, message) {
+    const element = document.getElementById(id);
 
-        if (element) {
-            // Giữ nguyên phần đầu của HTML và chỉ cập nhật đoạn mới nhất
-            element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + message;
+    if (element) {
+        // Giữ nguyên phần đầu của HTML và chỉ cập nhật đoạn mới nhất
+        element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + message;
+
+        // Thêm đoạn code để đổi màu sắc dựa trên giá trị payload
+        if (payload.includes("Có xe")) {
+            element.style.backgroundColor = "chartreuse";  // Màu xanh cho ô có xe
+        } else if (payload.trim() === "") {
+            element.style.backgroundColor = "white";  // Màu trắng cho ô trống
+        } else {
+            element.style.backgroundColor = "white";    // Màu đỏ cho các trường hợp khác
         }
     }
+}
 ;
