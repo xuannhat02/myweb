@@ -13,7 +13,7 @@ const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
     client.on('connect', onConnect);
     client.on('message', onMessageArrived);
 
-    function onConnect() {
+function onConnect() {
         console.log("Đã kết nối tới MQTT Broker");
         // Đăng ký để nhận thông tin từ các chủ đề cần lắng nghe
         client.subscribe("NhietDo");
@@ -23,16 +23,12 @@ const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
         client.subscribe("Vitri/3");
         client.subscribe("Vitri/4");
         client.subscribe("KhiGas");
+        client.subscribe("CanhBao");
     }
 
-    function onConnectionLost(responseObject) {
-        if (responseObject.errorCode !== 0) {
-            console.log("Mất kết nối: " + responseObject.errorMessage);
-        }
-    }
-
+ // Declare payload at the top level to make it accessible in both functions
 let payload;
-
+let alertActive = false;
 function onMessageArrived(topic, message) {
     // Xử lý dữ liệu nhận được từ MQTT
     payload = message.toString();
@@ -59,13 +55,16 @@ function onMessageArrived(topic, message) {
         case "Vitri/4":
             updateInfo("parkingStatus4", "Vị trí 4: " + payload);
             break;
+        case "CanhBao":
+            // Thêm xử lý cho topic CanhBao
+            handleCanhBao(payload);
+            break;
         // Thêm xử lý cho các chủ đề khác nếu cần
     }
 }
 
 function updateInfo(id, message) {
     const element = document.getElementById(id);
-
     if (element) {
         // Giữ nguyên phần đầu của HTML và chỉ cập nhật đoạn mới nhất
         element.innerHTML = element.innerHTML.split('<br>')[0] + "<br>" + message;
@@ -78,6 +77,26 @@ function updateInfo(id, message) {
         } else {
             element.style.backgroundColor = "white";    // Màu đỏ cho các trường hợp khác
         }
+    }
+}
+
+
+function showAlertUI() {
+    // Hiển thị thông điệp cảnh báo
+    document.getElementById("alertUI").innerHTML = "<img id='fireImage' src='xechuachay.jpg' alt='Fire Image'><p>Bãi đỗ xe đang có cháy</p>";
+    document.getElementById("alertUI").style.display = "block";
+}
+function hideAlertUI() {
+    // Ẩn thông điệp cảnh báo
+    document.getElementById("alertUI").style.display = "none";
+}
+function handleCanhBao(payload) {
+    console.log("Handling CanhBao:", payload);  // Kiểm tra xem hàm này được gọi hay không
+    if (payload === "1" && !alertActive) {
+        showAlertUI();
+        setTimeout(function () {
+            hideAlertUI();
+        }, 9000); // Hiển thị cảnh báo trong 30 giây
     }
 }
 ;

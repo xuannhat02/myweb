@@ -97,3 +97,38 @@ p {
     gap: 20px;
     justify-content: space-around;
 }
+#overlay, #alertUI {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#fireImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#alertUI img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+}
+
+#alertUI p {
+    position: absolute;
+    top: 50%; /* Điều chỉnh vị trí so với tâm của hình ảnh */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1002;
+    color: white; /* Đảm bảo chữ màu trắng */
+    font-size: 36px; /* Điều chỉnh kích thước chữ */
+    font-family: 'Arial', sans-serif; /* Thay đổi phông chữ nếu cần */
+}

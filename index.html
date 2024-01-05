@@ -5,14 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parking System Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #alertUI {
+            display: none;
+            background-color: red;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+            position: fixed; /* Đặt vị trí cố định trên màn hình */
+            top: 0;
+            left: 0;
+            width: 100%; /* Chiều rộng 100% của màn hình */
+            z-index: 999; /* Đảm bảo nằm trên tất cả các phần tử khác */
+        }
+    </style>
 </head>
 <body>
     <!-- Phần header -->
     <header class="header">
         <h1>Parking System Dashboard</h1>
     </header>
-
-    <!-- Phần nội dung -->
+    <div id="main-content">
+        <!-- Nội dung chính của trang web sẽ được hiển thị tại đây -->
+   
+    
     <div class="container">
         <!-- Thêm "first-row" vào div chứa nhiệt độ và độ ẩm -->
         <div class="info-container first-row">
@@ -50,7 +67,12 @@
             </div>
         </div>
     </div>
-
+    <div id="alertUI">
+        <img id="fireImage" src="xechuachay.jpg" alt="Fire Image">
+        <p>Bãi đỗ xe đang có cháy</p>
+    </div>          
+    <div id="overlay" class="overlay"></div>
+    </div>
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script src="app.js"></script>
 </body>
