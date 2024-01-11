@@ -3,7 +3,7 @@
 const clientId = "WEB";
 const username = "WEB";
 const password = "1111";
-const client = mqtt.connect("wss://ff310008.us-east-1.emqx.cloud:8084/mqtt", {
+const client = mqtt.connect("wss://hcb047f4.us-east-1.emqx.cloud:8084/mqtt", {
     clientId: clientId,
     username: username,
     password: password,
